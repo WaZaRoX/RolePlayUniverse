@@ -12,3 +12,6 @@ https://symfony.com/doc/current/page_creation.html
 composer require annotations --> route dans le controller 
 composer require twig --> install template twig
 composer require symfony/maker-bundle --dev --> pour que symfony génère les controllers
+composer require symfony/orm-pack --> pour installer doctrine
+	php bin/console doctrine:database:create
+	php bin/console make:migration

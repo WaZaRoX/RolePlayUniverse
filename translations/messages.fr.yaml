@@ -1,0 +1,30 @@
+home:
+    title: RolePlayUnivers
+    titlePres : Bienvenu sur RolePlayUnivers
+    description : RolePlayUnivers est l'outil qui vous servira à stoquer et organiser vos univers role play dans leur intégraplité. Cet outil vous sera  indispensable !
+
+menuUser:
+  univers : Univers
+  submenuUnivers :
+    home : Le monde
+    history : Histoire
+    rules : Règles
+    skills : Compétences
+    event : Evennements
+    items : Objets
+  fichePerso : Fiche personnage
+  signUp : S'inscrire
+  signIn : Se connecter
+
+register: S'inscrire
+
+form:
+  username: Nom d'utilisateur
+  firstname: Prenom
+  lastname: Nom
+  password: Mot de passe
+  numTel: Numéro de téléphone
+  email: Adresse email
+  agreeTerms: J'accepte les termes
+  dateNais: Date de naissance
+  submit: valider
