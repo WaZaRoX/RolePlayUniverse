@@ -12,9 +12,13 @@ menuUser:
     skills : Compétences
     event : Evennements
     items : Objets
-  fichePerso : Fiche personnage
-  signUp : S'inscrire
-  signIn : Se connecter
+  fichePerso : Fiche
+
+signIn : Se connecter
+yourConnected: Vous êtes connecté en tant que
+couldYouSignIn: veuillez vous connecter
+logout: Se déconnecter
+account: Mon compte
 
 register: S'inscrire
 
@@ -28,3 +32,6 @@ form:
   agreeTerms: J'accepte les termes
   dateNais: Date de naissance
   submit: valider
+
+courtesy:
+  please: S'il vous plait
