@@ -21,12 +21,15 @@ logout: Se déconnecter
 account: Mon compte
 
 register: S'inscrire
+change: modifier
 
 form:
   username: Nom d'utilisateur
   firstname: Prenom
   lastname: Nom
   password: Mot de passe
+  passwordRepeat: Confirmer le mot de passe
+  passwordRepeatError: Les mots de passe sont différents !
   numTel: Numéro de téléphone
   email: Adresse email
   agreeTerms: J'accepte les termes

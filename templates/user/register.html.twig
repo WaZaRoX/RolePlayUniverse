@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}register{% endtrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}register{% endtrans %}</h1>
+
+    {{ form_start(userForm)}}
+        <div class="form-group row">
+            {{ form_label(userForm.username, 'form.username',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.username, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(userForm.password.first, 'form.password',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.password.first, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(userForm.password.second, 'form.passwordRepeat',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.password.second, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(userForm.nom, 'form.lastname',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(userForm.prenom, 'form.firstname',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.prenom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(userForm.email, 'form.email',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(userForm.numTel, 'form.numTel',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.numTel, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(userForm.date_naissance, 'form.dateNais',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(userForm.date_naissance, {'attr': {'class': ''}}) }}
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group row">
+            <div class="col-sm-2">Conditions : </div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    {{ form_widget(userForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                    {{ form_label(userForm.agreeTerms, 'form.agreeTerms',{'label_attr': {'class': 'form-check-label'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">{% trans %}form.submit{% endtrans %}</button>
+    {{ form_end(userForm) }}
+{% endblock %}

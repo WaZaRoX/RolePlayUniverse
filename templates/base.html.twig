@@ -35,7 +35,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="">{% trans %}account{% endtrans %}</a>
+                                <a class="dropdown-item" href="{{ path('app_edit_user') }}">{% trans %}account{% endtrans %}</a>
                                 <a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}logout{% endtrans %}</a>
                             </div>
                         </li>
@@ -43,7 +43,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_login') }}">{% trans %}signIn{% endtrans %}</a>
                         </li>
-
                         <li>
                             <a class="nav-link" href="{{ path('app_register') }}">{% trans %}register{% endtrans %}</a>
                         </li>
