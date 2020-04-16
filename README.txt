@@ -18,4 +18,5 @@ composer require symfony/maker-bundle --dev --> pour que symfony génère les co
 composer require symfony/orm-pack --> pour installer doctrine
 composer require symfony/swiftmailer-bundle --> envoie de mail
 	php bin/console doctrine:database:create
+	php bin/console make:entity
 	php bin/console make:migration

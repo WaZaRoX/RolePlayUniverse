@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -59,6 +61,16 @@ class User implements UserInterface
      * @ORM\Column(type="date", nullable=true)
      */
     private $date_naissance;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Community", mappedBy="user", orphanRemoval=true)
+     */
+    private $communities;
+
+    public function __construct()
+    {
+        $this->communities = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -189,6 +201,37 @@ class User implements UserInterface
     public function setDateNaissance(?\DateTimeInterface $date_naissance): self
     {
         $this->date_naissance = $date_naissance;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Community[]
+     */
+    public function getCommunities(): Collection
+    {
+        return $this->communities;
+    }
+
+    public function addCommunity(Community $community): self
+    {
+        if (!$this->communities->contains($community)) {
+            $this->communities[] = $community;
+            $community->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommunity(Community $community): self
+    {
+        if ($this->communities->contains($community)) {
+            $this->communities->removeElement($community);
+            // set the owning side to null (unless already changed)
+            if ($community->getUser() === $this) {
+                $community->setUser(null);
+            }
+        }
 
         return $this;
     }
