@@ -13,42 +13,53 @@
     </head>
     <body>
         <header>
-            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-                <ul class="nav col-sm-3">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}menuUser.univers{% endtrans %}</a>
-                        <div class="dropdown-menu dropdown-menu-left">
-                            <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.home{% endtrans %}</a>
-                            <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.history{% endtrans %}</a>
-                            <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.rules{% endtrans %}</a>
-                            <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.skills{% endtrans %}</a>
-                            <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.event{% endtrans %}</a>
-                            <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.items{% endtrans %}</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="nav col-sm-6 justify-content-center">
-                    <h2>Nom Univers</h2>
-                </div>
-                <ul class="nav col-sm-3 justify-content-end">
-                    {% if app.user %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="{{ path('index') }}">NomUnivers</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{ path('app_edit_user') }}">{% trans %}account{% endtrans %}</a>
-                                <a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}logout{% endtrans %}</a>
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}menuUser.univers{% endtrans %}</a>
+                            <div class="dropdown-menu dropdown-menu-left">
+                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.home{% endtrans %}</a>
+                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.history{% endtrans %}</a>
+                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.rules{% endtrans %}</a>
+                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.skills{% endtrans %}</a>
+                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.event{% endtrans %}</a>
+                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.items{% endtrans %}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('universe') }}">{% trans %}menuUser.submenuUnivers.choiceUniverse{% endtrans %}</a>
                             </div>
                         </li>
-                    {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_login') }}">{% trans %}signIn{% endtrans %}</a>
+                            <a class="nav-link" href="#"></a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="{{ path('app_register') }}">{% trans %}register{% endtrans %}</a>
+                        <li class="nav-item">
+                            <a href="{{ path('universe') }}"></a>
                         </li>
-                    {% endif %}
-                </ul>
-            </div>
+                    </ul>
+                    <ul class="navbar-nav justify-content-end">
+                        {% if app.user %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ path('app_edit_user') }}">{% trans %}account{% endtrans %}</a>
+                                    <a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}logout{% endtrans %}</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_login') }}">{% trans %}signIn{% endtrans %}</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ path('app_register') }}">{% trans %}register{% endtrans %}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
         </header>
 
         <div class="container">

@@ -20,6 +20,7 @@ class UserController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder,  \Swift_Mailer $mailer): Response
     {
         $user = new User();
+        dump($user);
         $form = $this->createForm(RegisterFormType::class, $user);
         $form->handleRequest($request);
 
@@ -46,7 +47,7 @@ class UserController extends AbstractController
                 ->setBody(
                     $this->renderView(
                     // templates/emails/user.html.twig
-                        'emails/register.html.twig',
+                        'emails/registration.html.twig',
                         ['name' => $name]
                     ),
                     'text/html'
@@ -56,7 +57,7 @@ class UserController extends AbstractController
                 ->addPart(
                     $this->renderView(
                     // templates/emails/user.txt.twig
-                        'emails/register.txt.twig',
+                        'emails/registration.txt.twig',
                         ['name' => $name]
                     ),
                     'text/plain'

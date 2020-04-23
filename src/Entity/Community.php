@@ -17,13 +17,13 @@ class Community
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="communities")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="communities")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\universe", inversedBy="communities")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Universe", inversedBy="communities")
      * @ORM\JoinColumn(nullable=false)
      */
     private $universe;
