@@ -29,9 +29,11 @@ class Community
     private $universe;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Statut", inversedBy="communities")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $statut;
+    
 
     public function getId(): ?int
     {
@@ -62,12 +64,12 @@ class Community
         return $this;
     }
 
-    public function getStatut(): ?int
+    public function getStatut(): ?Statut
     {
         return $this->statut;
     }
 
-    public function setStatut(int $statut): self
+    public function setStatut(?Statut $statut): self
     {
         $this->statut = $statut;
 

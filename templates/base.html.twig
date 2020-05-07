@@ -14,30 +14,26 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{{ path('index') }}">NomUnivers</a>
+                <a class="navbar-brand" href="{{ path('index') }}">{{  app.session.get('universeName') }}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
+                     <!--   <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}menuUser.univers{% endtrans %}</a>
                             <div class="dropdown-menu dropdown-menu-left">
-                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.home{% endtrans %}</a>
-                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.history{% endtrans %}</a>
                                 <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.rules{% endtrans %}</a>
                                 <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.skills{% endtrans %}</a>
-                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.event{% endtrans %}</a>
-                                <a class="dropdown-item" href="#">{% trans %}menuUser.submenuUnivers.items{% endtrans %}</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ path('universe') }}">{% trans %}menuUser.submenuUnivers.choiceUniverse{% endtrans %}</a>
                             </div>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('universe') }}">{% trans %}menuUser.submenuUnivers.choiceUniverse{% endtrans %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('universe') }}"></a>
+                            <a class="nav-link" href="#">{% trans %}menuUser.perso{% endtrans %}</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">
@@ -61,12 +57,13 @@
                 </div>
             </nav>
         </header>
-
-        <div class="container">
-            {% block body %}{% endblock %}
-            <br/>
+        <div style="background-color: #EAEAEA">
+            <div class="container">
+                <br/>
+                {% block body %}{% endblock %}
+                <br/>
+            </div>
         </div>
-
         <footer class="card-footer text-center font-weight-light">
             <p class="m-0"><small>Copyright {{ "now"|date("Y")}} Antoine Gruson</small></p>
         </footer>

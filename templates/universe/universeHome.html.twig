@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ universeName }}{% endblock %}
+{% block body %}
+	<h1>{% trans %}courtesy.welcomeUniverse{% endtrans %} {{ universeName }} !</h1>
+	<br/>
+	<div class="row  shadow p-3 mb-5 bg-white rounded">
+		<div class="col-md-3 col-12">
+			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{% trans %}menuUser.univers{% endtrans %}</a>
+				<a class="nav-link" id="v-pills-rules-tab" data-toggle="pill" href="#v-pills-rules" role="tab" aria-controls="v-pills-rules" aria-selected="false">{% trans %}menuUser.submenuUnivers.rules{% endtrans %}</a>
+				{% if app.user and univForm is defined and admin == true %}
+					<a class="nav-link" id="v-pills-edit-tab" data-toggle="pill" href="#v-pills-edit" role="tab" aria-controls="v-pills-edit" aria-selected="false">{% trans %}form.edit{% endtrans %}</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-md-9 col-12">
+			<div class="tab-content" id="v-pills-tabContent">
+				<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{{ universeResume }}</div>
+				<div class="tab-pane fade" id="v-pills-rules" role="tabpanel" aria-labelledby="v-pills-rules-tab">{{ universeRules }}</div>
+				{% if app.user and univForm is defined and admin == true %}
+					<div class="tab-pane fade" id="v-pills-edit" role="tabpanel" aria-labelledby="v-pills-edit-tab">
+								{{ form_start(univForm) }}
+								<div class="form-group row">
+									{{ form_label(univForm.label , 'formUniv.name',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+									<div class="col-sm-10">
+										{{ form_widget(univForm.label, {'attr': {'class': 'form-control'}}) }}
+									</div>
+								</div>
+								<div class="form-group row">
+									{{ form_label(univForm.resumeUniverse , 'formUniv.resumeUniverse',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+									<div class="col-sm-10">
+										{{ form_widget(univForm.resumeUniverse, {'attr': {'class': 'form-control'}}) }}
+									</div>
+								</div>
+								<div class="form-group row">
+									{{ form_label(univForm.shortResume , 'formUniv.shortResume',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+									<div class="col-sm-10">
+										{{ form_widget(univForm.shortResume, {'attr': {'class': 'form-control'}}) }}
+									</div>
+								</div>
+								<div class="form-group row">
+									{{ form_label(univForm.rules , 'formUniv.rules',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+									<div class="col-sm-10">
+										{{ form_widget(univForm.rules, {'attr': {'class': 'form-control'}}) }}
+									</div>
+								</div>
+
+								<button type="submit" class="btn btn-success">{% trans %}form.edit{% endtrans %}</button>
+								{{ form_end(univForm) }}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

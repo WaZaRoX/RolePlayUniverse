@@ -7,13 +7,13 @@
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 {% if app.user %}
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">{% trans %}universePage.myUniverses{% endtrans %}</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{% trans %}universePage.allUniverses{% endtrans %}</a>
+                    <a class="nav-item nav-link active" id="nav-myUniverse-tab" data-toggle="tab" href="#nav-myUniverse" role="tab" aria-controls="nav-myUniverse" aria-selected="true">{% trans %}universePage.myUniverses{% endtrans %}</a>
+                    <a class="nav-item nav-link" id="nav-allUniverse-tab" data-toggle="tab" href="#nav-allUniverse" role="tab" aria-controls="nav-allUniverse" aria-selected="false">{% trans %}universePage.allUniverses{% endtrans %}</a>
                 {% else %}
-                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{% trans %}universePage.allUniverses{% endtrans %}</a>
+                    <a class="nav-item nav-link active" id="nav-allUniverse-tab" data-toggle="tab" href="#nav-allUniverse" role="tab" aria-controls="nav-allUniverse" aria-selected="false">{% trans %}universePage.allUniverses{% endtrans %}</a>
                 {% endif %}
                 {% if app.user and univForm is defined%}
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">{% trans %}universePage.createNewUniverse{% endtrans %}</a>
+                    <a class="nav-item nav-link" id="nav-createUniverse-tab" data-toggle="tab" href="#nav-createUniverse" role="tab" aria-controls="nav-createUniverse" aria-selected="false">{% trans %}universePage.createNewUniverse{% endtrans %}</a>
                 {% endif %}
             </div>
         </nav>
@@ -22,37 +22,36 @@
 
         <div class="tab-content" id="nav-tabContent">
             {% if app.user %}
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade show active" id="nav-myUniverse" role="tabpanel" aria-labelledby="nav-myUniverse-tab">
                     {% for community in userCommunities %}
-                        <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <div class="card border-dark mb-3">
                             <div class="card-header"><div class="card-title"><h5>{{ community.universe.label }}</h5></div></div>
                             <div class="card-body text-dark">
                                 <p class="card-text">{{ community.universe.shortResume }}</p>
                                 <p class="card-text"><small class="text-muted">{% trans %}userUniverseStatut.creator{% endtrans %} : {{ community.user.username }}</small></p>
                             </div>
-                            <div class="card-header"><a class="badge badge-secondary" href="{{ path('index') }}">{% trans %}chooseUniverse{% endtrans %}</a></div>
+                            <div class="card-header"><a class="badge badge-secondary" href="{{ path('setUniverse', {'id' : community.universe.id}) }}">{% trans %}chooseUniverse{% endtrans %}</a></div>
                         </div>
                     {% endfor %}
                 </div>
             {% endif %}
 
-            <div class="tab-pane fade{% if not app.user %} show active {% endif %}" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="tab-pane fade{% if not app.user %} show active {% endif %}" id="nav-allUniverse" role="tabpanel" aria-labelledby="nav-allUniverse-tab">
                 {% for community in allCommunities %}
-
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card border-dark mb-3">
                         <div class="card-header"><div class="card-title"><h5>{{ community.universe.label }}</h5></div></div>
                         <div class="card-body text-dark">
                             <p class="card-text">{{ community.universe.shortResume }}</p>
                             <p class="card-text"><small class="text-muted">{% trans %}userUniverseStatut.creator{% endtrans %} : {{ community.user.username }}</small></p>
                         </div>
-                        <div class="card-header"><a class="badge badge-secondary" href="{{ path('index') }}">{% trans %}chooseUniverse{% endtrans %}</a></div>
+                        <div class="card-header"><a class="badge badge-secondary" href="{{ path('setUniverse', {'id' : community.universe.id}) }}">{% trans %}chooseUniverse{% endtrans %}</a></div>
                     </div>
 
                 {% endfor %}
             </div>
 
             {% if app.user and univForm is defined %}
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                   <div class="tab-pane fade" id="nav-createUniverse" role="tabpanel" aria-labelledby="nav-createUniverse-tab">
                     {{ form_start(univForm) }}
                         <div class="form-group row">
                             {{ form_label(univForm.label , 'formUniv.name',{'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}

@@ -43,9 +43,15 @@ class Universe
      */
     private $communities;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Personnage", mappedBy="universe", orphanRemoval=true)
+     */
+    private $personnages;
+
     public function __construct()
     {
         $this->communities = new ArrayCollection();
+        $this->personnages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,18 @@ class Universe
         return $this->communities;
     }
 
+    /**
+     * @param $user
+     * @return mixed
+     */
+    public function getCommunityByUser($user){
+        foreach ($this->getCommunities()->toArray() as $community){
+            if($community->getUser() === $user){
+                return $community;
+            }
+        }
+    }
+
     public function addCommunity(Community $community): self
     {
         if (!$this->communities->contains($community)) {
@@ -126,6 +144,37 @@ class Universe
             // set the owning side to null (unless already changed)
             if ($community->getUniverse() === $this) {
                 $community->setUniverse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Personnage[]
+     */
+    public function getPersonnages(): Collection
+    {
+        return $this->personnages;
+    }
+
+    public function addPersonnage(Personnage $personnage): self
+    {
+        if (!$this->personnages->contains($personnage)) {
+            $this->personnages[] = $personnage;
+            $personnage->setUniverse($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonnage(Personnage $personnage): self
+    {
+        if ($this->personnages->contains($personnage)) {
+            $this->personnages->removeElement($personnage);
+            // set the owning side to null (unless already changed)
+            if ($personnage->getUniverse() === $this) {
+                $personnage->setUniverse(null);
             }
         }
 

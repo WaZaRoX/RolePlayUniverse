@@ -1,7 +1,5 @@
 home:
     title: RolePlayUniverse
-    titlePres : Bienvenu sur RolePlayUniverse
-    description : RolePlayUniverse est l'outil qui vous servira à stocker et organiser vos univers role play dans leur intégraplité. Cet outil vous sera  indispensable !
 
 menuUser:
   univers : L'univers
@@ -13,7 +11,8 @@ menuUser:
     event : Evennements
     items : Objets
     choiceUniverse: Choisir l'univers
-  fichePerso : Fiche
+  perso : Mes personnages
+  submenuPerso:
 
 signIn : Se connecter
 yourConnected: Vous êtes connecté en tant que
@@ -45,13 +44,16 @@ form:
   agreeTerms: J'accepte les termes
   dateNais: Date de naissance
   submit: valider
+  alreadyConnected: Vous êtes déjà connectés avec un compte !
+  edit: modifier
 
 formUniv:
   name: Nom de l'univers
-  resumeUniverse: Description de l'univers(Résumé histoire, résumé monde, résumé des enjeux ...)
-  shortResume: Résumé court de l'univers (255 charactères)
+  resumeUniverse: Description de l'univers (Résumé histoire, monde, enjeux ...)
+  shortResume: Résumé rapide de l'univers (255 caractères)
   rules: Règles
   create: Créer
 
 courtesy:
   please: S'il vous plait
+  welcomeUniverse: Bienvenue dans le monde de

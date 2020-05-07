@@ -67,9 +67,15 @@ class User implements UserInterface
      */
     private $communities;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Personnage", mappedBy="user")
+     */
+    private $personnages;
+
     public function __construct()
     {
         $this->communities = new ArrayCollection();
+        $this->personnages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +236,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($community->getUser() === $this) {
                 $community->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Personnage[]
+     */
+    public function getPersonnages(): Collection
+    {
+        return $this->personnages;
+    }
+
+    public function addPersonnage(Personnage $personnage): self
+    {
+        if (!$this->personnages->contains($personnage)) {
+            $this->personnages[] = $personnage;
+            $personnage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonnage(Personnage $personnage): self
+    {
+        if ($this->personnages->contains($personnage)) {
+            $this->personnages->removeElement($personnage);
+            // set the owning side to null (unless already changed)
+            if ($personnage->getUser() === $this) {
+                $personnage->setUser(null);
             }
         }
 
