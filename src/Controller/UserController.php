@@ -20,7 +20,6 @@ class UserController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder,  \Swift_Mailer $mailer): Response
     {
         $user = new User();
-        dump($user);
         $form = $this->createForm(RegisterFormType::class, $user);
         $form->handleRequest($request);
 

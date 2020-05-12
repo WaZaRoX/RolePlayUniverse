@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\CreateUniverseType;
 use App\Entity\Universe;
 use App\Entity\Community;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Service\UniverseData;
 
 //use App\Entity\User;
 
@@ -19,7 +19,6 @@ class UniverseController extends AbstractController
 {
     /**
      * @Route("/universe", name="universe")
-     *
      *
      */
     public function universeTab(Request $request): Response
@@ -54,7 +53,7 @@ class UniverseController extends AbstractController
                 $community->setStatut($statut);
                 $entityManager->persist($community);
                 $entityManager->flush();
-                return $this->redirectToRoute('index');
+                return $this->redirectToRoute('setUniverse', array('id'=> $universe->getId()));
             }
             $options += ['univForm' => $form->createView()];
         }
@@ -63,26 +62,12 @@ class UniverseController extends AbstractController
 
 
     /**
-     * @return int|mixed
-     */
-    public function getIdUniverseInSession(Request $request){
-        if(($request->getSession()->get('universeId')) != null) {
-            $id = $request->getSession()->get('universeId');
-        }else{
-            $this->setUniverseSession($request, 1);
-            $id = 1;
-        }
-        return $id;
-    }
-
-
-    /**
      * @Route("/universeIndex", name="universeIndex")
      *
      */
-    public function indexUniverse(Request $request)
+    public function indexUniverse(Request $request,UniverseData $universeData)
     {
-        $id = $this->getIdUniverseInSession($request);
+        $id = $universeData->getIdUniverseInSession();
         $universeRepository = $this->getDoctrine()->getRepository(Universe::class);
         $universe = $universeRepository->find($id);
         $options = ['universeName' => $universe->getLabel(),
@@ -110,15 +95,10 @@ class UniverseController extends AbstractController
     /**
      * @Route("/setUniverse/{id}", name="setUniverse")
      *
-     *
      */
-    public function setUniverseSession(Request $request,$id){
-        $request->getSession()->set('universeId', $id);
-        $universe = $this->getDoctrine()->getRepository(Universe::class)->find($id);
-        $request->getSession()->set('universeName', $universe->getLabel());
+    public function setUniverseSession($id, UniverseData $universeData){
+        $universeData->setUniverseSession($id);
         return $this->redirectToRoute('index');
     }
-
-
 
 }

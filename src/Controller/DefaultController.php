@@ -17,7 +17,7 @@ class DefaultController extends AbstractController
         ]);
 
         return $response;
-        //return $this->render('index.html.twig', [
+        //return $this->render('persoList.html.twig', [
         //]);
     }
 }

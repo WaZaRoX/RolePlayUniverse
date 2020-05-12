@@ -29,11 +29,13 @@
                                 <a class="dropdown-item" href="{{ path('universe') }}">{% trans %}menuUser.submenuUnivers.choiceUniverse{% endtrans %}</a>
                             </div>
                         </li> -->
+                        {% if app.user %}
+	                    <li class="nav-item">
+		                    <a class="nav-link" href="{{ path('personnage') }}">{% trans %}menuUser.perso{% endtrans %}</a>
+	                    </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('universe') }}">{% trans %}menuUser.submenuUnivers.choiceUniverse{% endtrans %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">{% trans %}menuUser.perso{% endtrans %}</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">

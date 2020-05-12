@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}listPersonnage{% endtrans %}{% endblock %}
+
+{% block body %}
+
+	<h1>{% trans %}persoPage.title{% endtrans %}</h1>
+	<br/>
+	{% if app.user %}
+		<div class="shadow p-3 mb-5 bg-white rounded">
+			{% if userPersos is defined %}
+				{% for perso in userPersos %}
+					<div class="card mb-3" style="max-width: 540px;">
+						<div class="row no-gutters">
+							<div class="col-md-4">
+								<img src="..." class="card-img" alt="...">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">{{ perso.nom }} {{ perso.prenom }}</h5>
+									<p class="card-text">
+										{% trans %}persoPage.card.dateOfBirth{% endtrans %}
+									</p>
+									<p class="card-text"><small class="text-muted"></small></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				<br/>
+			{% endif %}
+			<a href="{{ path('create_perso') }}" class="btn btn-primary" role="button" aria-pressed="true">{% trans %}persoPage.createMyPersonnage{% endtrans %}</a>
+			<hr/>
+			{% if admin == true%}
+				{% if allPersos is defined %}
+					{% for perso in allPersos %}
+					{% endfor %}
+					<br/>
+				{% endif %}
+				<a href="{{ path('create_perso') }}" class="btn btn-success" role="button" aria-pressed="true">{% trans %}persoPage.createPersonnage{% endtrans %}</a>
+			{% endif %}
+		</div>
+	{% else %}
+		<div class="alert alert-danger" role="alert">{% trans %}persoPage.youHaveToBeConnected{% endtrans %} !</div>
+	{% endif %}
+
+{% endblock %}

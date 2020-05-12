@@ -22,6 +22,7 @@ account: Mon compte
 register: S'inscrire
 change: modifier
 chooseUniverse: Choisir cet univers
+error: Une erreur est survenue.
 
 userUniverseStatut:
   creator: Créateur
@@ -31,6 +32,15 @@ universePage:
   myUniverses: Mes univers
   allUniverses: Tous les univers
   createNewUniverse: Créer son univers
+
+listPersonnage: Personnages
+persoPage:
+  youHaveToBeConnected: Vous devez vous connecter pour avoir accès à vos personnages
+  title: Mes personnages
+  createMyPersonnage: Créer mon personnage
+  createPersonnage: Créer un personnage
+  card:
+    dateOfBirth: Date de naissance
 
 form:
   username: Nom d'utilisateur
