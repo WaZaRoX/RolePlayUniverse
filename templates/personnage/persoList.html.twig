@@ -9,35 +9,59 @@
 	{% if app.user %}
 		<div class="shadow p-3 mb-5 bg-white rounded">
 			{% if userPersos is defined %}
-				{% for perso in userPersos %}
-					<div class="card mb-3" style="max-width: 540px;">
-						<div class="row no-gutters">
-							<div class="col-md-4">
-								<img src="..." class="card-img" alt="...">
+				<div class="container row">
+					{% for perso in userPersos %}
+						<div class="card bg-light mb-3" style="max-width: 18rem; margin: 5px;">
+							<div class="card-header">{{ perso.prenom }} {{ perso.nom }}</div>
+							<div class="card-body">
+								{% if perso.parents|length > 0 %}
+									<h5 class="card-title">{% trans %}persoPage.card.parents{% endtrans %} :</h5>
+									{% for parent in perso.parents %}
+										<p class="card-text"> {{ parent.prenom }} {{ parent.nom }}</p>
+									{% endfor %}
+								{% endif %}
+								<h5 class="card-title">{% trans %}form.dateNais{% endtrans %} :</h5>
+								<p class="card-text">{{ perso.date_naissance|date("d-m-Y") }}</p>
 							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">{{ perso.nom }} {{ perso.prenom }}</h5>
-									<p class="card-text">
-										{% trans %}persoPage.card.dateOfBirth{% endtrans %}
-									</p>
-									<p class="card-text"><small class="text-muted"></small></p>
-								</div>
+							<div class="card-footer">
+								<a href="{{ path('edit_perso', {'id' : perso.id}) }}" class="btn btn-success" role="button" aria-pressed="true">{% trans %}persoPage.editPersonnage{% endtrans %}</a>
+								<a href="{{ path('remove_perso', {'id' : perso.id}) }}" class="btn btn-danger" role="button" aria-pressed="true">{% trans %}persoPage.removePersonnage{% endtrans %}</a>
+								<a href="{{ path('familytree') }}" class="btn btn-warning" role="button" aria-pressed="true">{% trans %}persoPage.familytree{% endtrans %}</a>
 							</div>
 						</div>
-					</div>
-				{% endfor %}
+					{% endfor %}
+				</div>
 				<br/>
 			{% endif %}
+
 			<a href="{{ path('create_perso') }}" class="btn btn-primary" role="button" aria-pressed="true">{% trans %}persoPage.createMyPersonnage{% endtrans %}</a>
 			<hr/>
-			{% if admin == true%}
+			{% if admin is defined and admin == true %}
 				{% if allPersos is defined %}
-					{% for perso in allPersos %}
-					{% endfor %}
+					<div class="container row">
+						{% for perso in allPersos %}
+							<div class="card bg-light mb-3" style="max-width: 18rem; margin: 5px;">
+								<div class="card-header">{{ perso.prenom }} {{ perso.nom }}</div>
+								<div class="card-body">
+									{% if perso.parents|length > 0 %}
+										<h5 class="card-title">{% trans %}persoPage.card.parents{% endtrans %} :</h5>
+										{% for parent in perso.parents %}
+											<p class="card-text"> {{ parent.prenom }} {{ parent.nom }}</p>
+										{% endfor %}
+									{% endif %}
+									<h5 class="card-title">{% trans %}form.dateNais{% endtrans %} :</h5>
+									<p class="card-text">{{ perso.date_naissance|date("d-m-Y") }}</p>
+								</div>
+								<div class="card-footer">
+									<a href="{{ path('edit_perso', {'id' : perso.id}) }}" class="btn btn-success" role="button" aria-pressed="true">{% trans %}persoPage.editPersonnage{% endtrans %}</a>
+									<a href="{{ path('remove_perso', {'id' : perso.id}) }}" class="btn btn-danger" role="button" aria-pressed="true">{% trans %}persoPage.removePersonnage{% endtrans %}</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
 					<br/>
 				{% endif %}
-				<a href="{{ path('create_perso') }}" class="btn btn-success" role="button" aria-pressed="true">{% trans %}persoPage.createPersonnage{% endtrans %}</a>
+				<a href="{{ path('create_perso') }}" class="btn btn-secondary" role="button" aria-pressed="true">{% trans %}persoPage.createPersonnage{% endtrans %}</a>
 			{% endif %}
 		</div>
 	{% else %}

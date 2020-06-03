@@ -2,11 +2,15 @@
 
 namespace App\Service;
 
+use App\Entity\Community;
+use App\Entity\Statut;
 use App\Entity\Universe;
+use App\Repository\StatutRepository;
 use App\Repository\UniverseRepository;
 use App\Repository\CommunityRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Security;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UniverseData{
 
@@ -26,15 +30,35 @@ class UniverseData{
     private $universeRepository;
 
     /**
+     * @var StatutRepository
+     */
+    private $statutRepository;
+
+    /**
+     * @var Security
+     */
+    private $security;
+
+    /**
+     * @var
+     */
+    private $em;
+
+
+    /**
      * universeData constructor.
      * @param SessionInterface $session
      * @param CommunityRepository $communityRepository
+     * @param StatutRepository $statutRepository
      */
-    public function __construct(SessionInterface $session, CommunityRepository $communityRepository, UniverseRepository $universeRepository)
+    public function __construct(SessionInterface $session, CommunityRepository $communityRepository, UniverseRepository $universeRepository, StatutRepository $statutRepository, Security $security,EntityManagerInterface $em)
     {
         $this->session = $session;
         $this->communityRepository = $communityRepository;
         $this->universeRepository = $universeRepository;
+        $this->statutRepository = $statutRepository;
+        $this->security = $security;
+        $this->em = $em;
     }
 
     /**
@@ -50,34 +74,43 @@ class UniverseData{
         return $id;
     }
 
-    /**
-     * @Route("/setUniverse/{id}", name="setUniverse")
-     *
-     */
-    public function setUniverseSession($id){
-        $this->session->set('universeId', $id);
-        $universe = $this->universeRepository->find($id);
-        $this->session->set('universeName', $universe->getLabel());
+    public function getSession(){
+        return $this->session;
     }
 
     /**
-     * @param int $idUser
-     * @param int $idUniverse
-     * @param String $controllerName
-     * @return bool
+     * @return Universe|null
      */
-    public function isPermissionGranted(int $idUser,int $idUniverse,String $controllerName){
-        $res = false;
-        if(count($communities = $this->communityRepository->findBy(["user"=>$idUser, "universe"=>$idUniverse])) > 0){
-            $idStatut = $communities[0]->getStatut()->getId();
-            switch ($controllerName){
-                case "PersonnageController":
-                    $res = $idStatut <= 3;
-                    break;
+    public function getUniverseInSession(){
+        return $this->universeRepository->find($this->getIdUniverseInSession());
+    }
+
+    /**
+     * @param $id
+     */
+    public function setUniverseSession($id){
+        if(($universe = $this->universeRepository->find($id)) != null) {
+            $this->session->set('universeId', $id);
+            $this->session->set('universeName', $universe->getLabel());
+            $user = $this->security->getUser();
+            //--- L'utilisateur doit s'inscrire à l'univers en tant que non membre ---
+            if ($user != null && $this->communityRepository->findBy(["user" => $user->getId(), "universe" => $id]) == null) {
+                $community = new Community();
+                $community->setUser($user);
+                $community->setUniverse($universe);
+                $community->setStatut($this->statutRepository->find("5"));
+                $this->em->persist($community);
+                $this->em->flush();
             }
-        }else{
-            $res = false;
         }
-        return $res;
+    }
+
+    /**
+     * @return Community|null
+     */
+    public function getCommunityCurrentUserUniverse(){
+        $universeId = $this->getIdUniverseInSession();
+        $userId = $this->security->getUser()->getId();
+        return $this->communityRepository->findOneBy(["user" => $userId, "universe" => $universeId]);
     }
 }

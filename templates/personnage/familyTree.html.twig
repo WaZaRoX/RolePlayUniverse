@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}persoPage.createPersonnage{% endtrans %}{% endblock %}
+
+{% block body %}
+<h2>{% trans %}persoPage.familytree{% endtrans %}</h2>
+	<br/>
+	{% if app.user  %}
+		<div class="js-user-parents" data-parents="{{ jsonTab }}">
+
+		</div>
+		<div class="shadow p-3 mb-5 bg-white rounded">
+			<canvas id="familytree" width="1000" height="1000">
+			</canvas>
+		</div>
+	{% else %}
+		<div class="alert
+		alert-danger" role="alert">{% trans %}persoPage.youHaveToBeConnected{% endtrans %} !</div>
+	{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+	var c = document.getElementById("familytree");
+	var ctx = c.getContext("2d");
+	var width = ctx.canvas.attributes.width.value;
+	var height = ctx.canvas.attributes.height.value;
+	ctx.moveTo(0,0);
+	ctx.font = "20px Arial";
+	ctx.fillText("{{ perso.nom }} {{ perso.prenom }}", width/2 - 10, 50);
+
+	var userParents = document.querySelector('.js-user-parents');
+	var parents = userParents.dataset.parents;
+	var yOld = 50 + 20;
+	var xOld = width/2 + 20;
+	ctx.moveTo(xOld,yOld);
+	var obj = JSON.parse(parents);
+	var nbParent = obj.length;
+	var y = yOld + 100;
+	for(i = 0; i < nbParent; i++){
+	   var x = ((width/nbParent)*i)+((width/nbParent)/2);
+		ctx.lineTo(x + 20,y);
+		ctx.fillText(obj[i].nom + " " + obj[i].prenom, x-40 ,y + 40);
+	console.log(obj[i]);
+	    ctx.moveTo(xOld,yOld);
+	}
+	ctx.stroke();
+
+
+{% endblock %}

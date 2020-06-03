@@ -67,9 +67,7 @@ class UniverseController extends AbstractController
      */
     public function indexUniverse(Request $request,UniverseData $universeData)
     {
-        $id = $universeData->getIdUniverseInSession();
-        $universeRepository = $this->getDoctrine()->getRepository(Universe::class);
-        $universe = $universeRepository->find($id);
+        $universe = $universeData->getUniverseInSession();
         $options = ['universeName' => $universe->getLabel(),
             'universeResume' => $universe->getResumeUniverse(),
             'universeRules' => $universe->getRules(),

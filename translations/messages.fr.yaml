@@ -39,8 +39,12 @@ persoPage:
   title: Mes personnages
   createMyPersonnage: Créer mon personnage
   createPersonnage: Créer un personnage
+  editPersonnage: Editer
+  removePersonnage: Supprimer
+  familytree: arbre généalogique
   card:
     dateOfBirth: Date de naissance
+    parents: Parents
 
 form:
   username: Nom d'utilisateur

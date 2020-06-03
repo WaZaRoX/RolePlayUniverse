@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}persoPage.createPersonnage{% endtrans %}{% endblock %}
+{% block title %}{% trans %}persoPage.editPersonnage{% endtrans %}{% endblock %}
 
 {% block body %}
-<h2>{% trans %}persoPage.createPersonnage{% endtrans %}</h2>
+<h2>{% trans %}persoPage.editPersonnage{% endtrans %}</h2>
 	{% if app.user  %}
 		{% if persoForm is defined %}
 			<div class="shadow p-3 mb-5 bg-white rounded">
@@ -33,6 +33,7 @@
 						{{ form_row(parent) }}
 					{% endfor %}
 				</div>
+
 
 				<button type="submit" class="btn btn-primary">{% trans %}form.submit{% endtrans %}</button>
 				{{ form_end(persoForm) }}

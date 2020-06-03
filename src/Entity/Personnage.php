@@ -52,8 +52,8 @@ class Personnage
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Personnage", inversedBy="childs")
      * @ORM\JoinTable(name="parent_child",
-     *      joinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="child_d", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id")}
      *      )
      *
      */
@@ -110,6 +110,19 @@ class Personnage
     }
 
     public function setDateNaissance(?\DateTimeInterface $date_naissance): self
+    {
+        $this->date_naissance = $date_naissance;
+
+        return $this;
+    }
+
+    // j'ai pas compris ...
+    public function getDate_naissance(): ?\DateTimeInterface
+    {
+        return $this->date_naissance;
+    }
+
+    public function setDate_naissance(?\DateTimeInterface $date_naissance): self
     {
         $this->date_naissance = $date_naissance;
 

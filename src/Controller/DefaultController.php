@@ -15,7 +15,9 @@ class DefaultController extends AbstractController
         $response = $this->forward('App\Controller\UniverseController::indexUniverse', [
             'request'  => $request,
         ]);
-
+        if($this->getUser() != null) {
+            $request->getSession()->set('userId', $this->getUser()->getId());
+        }
         return $response;
         //return $this->render('persoList.html.twig', [
         //]);
