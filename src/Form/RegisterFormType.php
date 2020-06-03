@@ -53,16 +53,16 @@ class RegisterFormType extends AbstractType
             ->add('email', EmailType::class, ['required' => false])
             ->add('nom', TextType::class, ['required' => false, 'constraints' =>[
                 new Length([
-                    'min' => 6,
-                    'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    'min' => 1,
+                    'minMessage' => 'Your name should be at least {{ limit }} characters',
                     // max length allowed by Symfony for security reasons
                     'max' => 90,
                 ]),
             ]])
             ->add('prenom', TextType::class, ['required' => false, 'constraints' =>[
                 new Length([
-                    'min' => 6,
-                    'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    'min' => 1,
+                    'minMessage' => 'Your firstname should be at least {{ limit }} characters',
                     // max length allowed by Symfony for security reasons
                     'max' => 90,
                 ]),

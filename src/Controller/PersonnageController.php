@@ -175,7 +175,6 @@ class PersonnageController extends AbstractController
             array_push($jsonTab, $jsonPerso);
         }
 
-        dump(json_encode($jsonTab));
         $options += ["perso" => $perso,"jsonTab" => json_encode($jsonTab)];
 
 

@@ -26,7 +26,7 @@
 							<div class="card-footer">
 								<a href="{{ path('edit_perso', {'id' : perso.id}) }}" class="btn btn-success" role="button" aria-pressed="true">{% trans %}persoPage.editPersonnage{% endtrans %}</a>
 								<a href="{{ path('remove_perso', {'id' : perso.id}) }}" class="btn btn-danger" role="button" aria-pressed="true">{% trans %}persoPage.removePersonnage{% endtrans %}</a>
-								<a href="{{ path('familytree') }}" class="btn btn-warning" role="button" aria-pressed="true">{% trans %}persoPage.familytree{% endtrans %}</a>
+								<a href="{{ path('familytree', {'idPerso' : perso.id}) }}" class="btn btn-warning" role="button" aria-pressed="true">{% trans %}persoPage.familytree{% endtrans %}</a>
 							</div>
 						</div>
 					{% endfor %}
@@ -55,6 +55,7 @@
 								<div class="card-footer">
 									<a href="{{ path('edit_perso', {'id' : perso.id}) }}" class="btn btn-success" role="button" aria-pressed="true">{% trans %}persoPage.editPersonnage{% endtrans %}</a>
 									<a href="{{ path('remove_perso', {'id' : perso.id}) }}" class="btn btn-danger" role="button" aria-pressed="true">{% trans %}persoPage.removePersonnage{% endtrans %}</a>
+									<a href="{{ path('familytree', {'idPerso' : perso.id}) }}" class="btn btn-warning" role="button" aria-pressed="true">{% trans %}persoPage.familytree{% endtrans %}</a>
 								</div>
 							</div>
 						{% endfor %}

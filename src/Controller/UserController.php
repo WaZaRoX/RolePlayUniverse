@@ -94,7 +94,6 @@ class UserController extends AbstractController
 
             $formPass = $this->createForm(PasswordUserFormType::class, $user);
             $formPass->handleRequest($request);
-            dump($user);
             if ($formPass->isSubmitted() && $formPass->isValid())
             {
                 $user->setPassword(
